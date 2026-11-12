@@ -1,2 +1,2 @@
 # guessing-number-game-
-it's a game in which user enter a rendom digits and guess the number
+This C-based console application implements an interactive Number Guessing Game where the computer generates a secret random number between 1 and 100, and the player attempts to guess it. The application provides instant feedback after every guess, guiding the user by indicating whether their guess is too high or too low. Additionally, the program tracks the total number of attempts taken to find the correct number and validates user input to prevent errors from non-numeric entries. Once a round concludes, players have the option to replay the game with a newly generated number or exit smoothly, offering an engaging and user-friendly terminal experience.
