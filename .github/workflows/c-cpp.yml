@@ -1,23 +1,46 @@
-name: C/C++ CI
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+int main() {
+    int secret, guess, attempts = 0;
+    char choice;
 
-jobs:
-  build:
+    srand(time(NULL));  // seed the random number generator
 
-    runs-on: ubuntu-latest
+    do {
+        secret = rand() % 100 + 1;  // random number from 1 to 100
+        attempts = 0;
 
-    steps:
-    - uses: actions/checkout@v4
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+        printf("\n=== Number Guessing Game ===\n");
+        printf("I have picked a number between 1 and 100.\n");
+        printf("Can you guess it?\n\n");
+
+        do {
+            printf("Enter your guess: ");
+            if (scanf("%d", &guess) != 1) {
+                printf("Invalid input! Please enter a number.\n");
+                while (getchar() != '\n');  // clear input buffer
+                continue;
+            }
+
+            attempts++;
+
+            if (guess < secret) {
+                printf("Too low! Try again.\n");
+            } else if (guess > secret) {
+                printf("Too high! Try again.\n");
+            } else {
+                printf("\nCorrect! You guessed the number %d in %d attempt(s).\n",
+                       secret, attempts);
+            }
+        } while (guess != secret);
+
+        printf("\nDo you want to play again? (y/n): ");
+        scanf(" %c", &choice);
+
+    } while (choice == 'y' || choice == 'Y');
+
+    printf("\nThanks for playing. Goodbye!\n");
+    return 0;
+}
